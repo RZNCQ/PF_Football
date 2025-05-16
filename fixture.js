@@ -27,6 +27,8 @@ function getTeamLogo(){
 
 }
 getTeamLogo();
+const fixtureData = document.querySelector(".league-fixtures");
+let htmlContent = "";
 function getEplFixture() {
   fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=2024`, {
     headers: headers
@@ -41,9 +43,27 @@ function getEplFixture() {
         const homeScore = fixture.goals.home;
         const awayScore = fixture.goals.away;
         const matchDate = fixture.fixture.date
+        //Assign The Match Status If The Match Hasnt Been Played
+        let matchDetail = `<span class="status">${matchStatus}</span>`;
+        //To Check If The Match is Over If it is Over It will Retrive The Score Insted Of the Status
+        if (matchStatus.toLowerCase().includes('finished')) {
+          matchDetail = `<span class="score">${homeScore} - ${awayScore}</span>`;
+        }
+        //To append the fixture List WIth the current Fixture retrieve In The loop 
+        htmlContent += `
+          <li class="fixture-data">
+            <span class="match-date">${matchDate}}</span>
+            <span class="home-team">${homeTeam}</span>
+            ${matchDetail}
+            <span class="away-team">${awayTeam}</span>
+          </li>
+        `      
       });
+      fixtureData.innerHTML = htmlContent;
     })
     .catch(error => {
-      console.error('Error fetching fixtures:', error);
+      alert('Error fetching fixtures:', error);
+      fixtureData.innerHTML = '<li class="error-warning">Failed to load fixtures.</li>';
     });
 }
+getEplFixture();
