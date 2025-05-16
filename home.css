@@ -27,6 +27,7 @@ body{
 }
 .nav-button{
     background-color: #111;
+    font-family:serif;
     color: #fff;
     border: none;
     outline:none;
