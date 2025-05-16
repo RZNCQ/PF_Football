@@ -27,43 +27,73 @@ function getTeamLogo(){
 
 }
 getTeamLogo();
+/*Check Which League User Pick Based On The Image Click*/
+//Get All img element in the logo-container
+const images = document.querySelectorAll(".logo-container img");
+//add event listener to detect user click
+images.forEach(image=>{
+    image.addEventListener("click",function(){
+        const selectedImageId = this.id;
+        if(selectedImageId==="englishPremierLeague")
+        {
+            getFixture(39);
+        }
+        else if(selectedImageId==="laLiga")
+        {
+            getFixture(140);
+        }
+        else if(selectedImageId==="serieA")
+        {
+            getFixture(135);
+        }
+        else if(selectedImageId==="bundesliga")
+        {
+            getFixture(78);
+        }
+        else if(selectedImageId==="ligue1")
+        {
+            getFixture(61);
+        }
+    })
+})
+
+
 const fixtureData = document.querySelector(".league-fixtures");
-let htmlContent = "";
-function getEplFixture() {
-  fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=2024`, {
+function getFixture(id) {
+  fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${id}&season=2024`, {
     headers: headers
   })
     .then(response => response.json())
     .then(data=>{
-      //To Retrieve The Fixture Teams,Match Status & Score And Store It In Variable
-      data.response.forEach(fixture => {
-        const homeTeam = fixture.teams.home.name;
-        const awayTeam = fixture.teams.away.name;
-        const matchStatus = fixture.fixture.status.long;
-        const homeScore = fixture.goals.home;
-        const awayScore = fixture.goals.away;
-        const matchDate = fixture.fixture.date
-        //Assign The Match Status If The Match Hasnt Been Played
-        let matchDetail = `<span class="status">${matchStatus}</span>`;
-        //To Check If The Match is Over If it is Over It will Retrive The Score Insted Of the Status
-        if (matchStatus.toLowerCase().includes('finished')) {
-          matchDetail = `<span class="score">${homeScore} - ${awayScore}</span>`;
-        }
-        //To append the fixture List WIth the current Fixture retrieve In The loop 
-        htmlContent += `
-          <li class="fixture-data">
-            <span class="match-date">${matchDate}}</span>
-            <span class="home-team">${homeTeam}</span>
-            ${matchDetail}
-            <span class="away-team">${awayTeam}</span>
-          </li>
-        `      
-      });
-      fixtureData.innerHTML = htmlContent;
+        let htmlContent = "";
+        //To Retrieve The Fixture Teams,Match Status & Score And Store It In Variable
+        data.response.forEach(fixture => {
+            const homeTeam = fixture.teams.home.name;
+            const awayTeam = fixture.teams.away.name;
+            const matchStatus = fixture.fixture.status.long;
+            const homeScore = fixture.goals.home;
+            const awayScore = fixture.goals.away;
+            const matchDate = fixture.fixture.date
+            //Assign The Match Status If The Match Hasnt Been Played
+            let matchDetail = `<span class="status">${matchStatus}</span>`;
+            //To Check If The Match is Over If it is Over It will Retrive The Score Insted Of the Status
+            if (matchStatus.toLowerCase().includes('finished')) {
+            matchDetail = `<span class="score">${homeScore} - ${awayScore}</span>`;
+            }
+            //To append the fixture List WIth the current Fixture retrieve In The loop 
+            htmlContent += `
+            <li class="fixture-data">
+                <span class="match-date">${matchDate}}</span>
+                <span class="home-team">${homeTeam}</span>
+                ${matchDetail}
+                <span class="away-team">${awayTeam}</span>
+            </li>
+            `      
+        });
+        fixtureData.innerHTML = htmlContent;
     })
     .catch(error => {
       alert('Error fetching fixtures:', error);
       fixtureData.innerHTML = '<li class="error-warning">Failed to load fixtures.</li>';
     });
 }
-getEplFixture();
