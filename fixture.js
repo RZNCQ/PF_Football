@@ -127,4 +127,7 @@ function getTopScorer(id){
         })
         leagueStatsData.innerHTML = htmlContentStats;
     })
+    .catch(error=>{
+        leagueStatsData.innerHTML = '<li class="error-warning">Failed to load Top Scorer.</li>'
+    })
 }

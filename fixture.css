@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(39, 39, 39);
+    color: rgb(228, 225, 225);
+}
+.logo-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: rgb(29, 29, 29); 
+    padding: 20px 15px;
+    gap: 25px;
+    border-bottom: 3px solid rgb(0, 0, 0);
+}
+.logo-container img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    cursor: pointer;
+    border: 2px solid black;
+}
+.logo-container img:hover{
+    transform: scale(1.1);
+}
