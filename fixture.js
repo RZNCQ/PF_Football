@@ -30,42 +30,49 @@ getTeamLogo();
 /*Check Which League User Pick Based On The Image Click*/
 //Get All img element in the logo-container
 const images = document.querySelectorAll(".logo-container img");
-//add event listener to detect user click
+//add event listener to detect Which Image User Click
 images.forEach(image=>{
     image.addEventListener("click",function(){
+        //Get the ID Of the Image Element From HTML According TO User Click.
         const selectedImageId = this.id;
+        /*If User Click On The Premier League etc... Logo 
+        It Will Call The Functions WIth The League ID*/
         if(selectedImageId==="englishPremierLeague")
         {
             getFixture(39);
+            getTopScorer(39);
         }
         else if(selectedImageId==="laLiga")
         {
             getFixture(140);
+            getTopScorer(140);
         }
         else if(selectedImageId==="serieA")
         {
             getFixture(135);
+            getTopScorer(135);
         }
         else if(selectedImageId==="bundesliga")
         {
             getFixture(78);
+            getTopScorer(78);
         }
         else if(selectedImageId==="ligue1")
         {
             getFixture(61);
+            getTopScorer(61);    
         }
     })
 })
 
-
 const fixtureData = document.querySelector(".league-fixtures");
 function getFixture(id) {
-  fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${id}&season=2024`, {
-    headers: headers
-  })
+    let htmlContentFixture = "";
+    fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${id}&season=2024`, {
+        headers: headers
+    })
     .then(response => response.json())
     .then(data=>{
-        let htmlContent = "";
         //To Retrieve The Fixture Teams,Match Status & Score And Store It In Variable
         data.response.forEach(fixture => {
             const homeTeam = fixture.teams.home.name;
@@ -81,7 +88,7 @@ function getFixture(id) {
             matchDetail = `<span class="score">${homeScore} - ${awayScore}</span>`;
             }
             //To append the fixture List WIth the current Fixture retrieve In The loop 
-            htmlContent += `
+            htmlContentFixture += `
             <li class="fixture-data">
                 <span class="match-date">${matchDate}}</span>
                 <span class="home-team">${homeTeam}</span>
@@ -90,10 +97,34 @@ function getFixture(id) {
             </li>
             `      
         });
-        fixtureData.innerHTML = htmlContent;
+        fixtureData.innerHTML = htmlContentFixture;
     })
     .catch(error => {
       alert('Error fetching fixtures:', error);
       fixtureData.innerHTML = '<li class="error-warning">Failed to load fixtures.</li>';
     });
+}
+const leagueStatsData = document.querySelector('.league-stats');
+function getTopScorer(id){
+    let htmlContentStats = "";
+    fetch(`https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${id}&season=2024`,{
+        headers:headers
+    })
+    .then(response=>response.json())
+    .then(data=>{
+        data.response.forEach(stats=>{
+            const playerName = stats.player.name;
+            const goalScored = stats.statistics[0].goals.total;
+            const playerImage = stats.player.photo;
+            htmlContentStats+= `
+            <li>
+                <img src="${playerImage}" alt="Player Image">
+                <span>
+                    ${playerName}
+                    Goals: ${goalScored}
+                </span>
+            </li>`
+        })
+        leagueStatsData.innerHTML = htmlContentStats;
+    })
 }
