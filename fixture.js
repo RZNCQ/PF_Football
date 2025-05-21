@@ -1,4 +1,4 @@
-//Store The API Key And The Custom HTTP Header Of The API 
+//Store The API Key And The API Host. 
 const headers = {
     'x-rapidapi-key': '5b2f9a1189msh6167f7a56a19908p168f53jsna42dc93fdb51',
     'x-rapidapi-host': 'api-football-v1.p.rapidapi.com'
@@ -6,35 +6,32 @@ const headers = {
 function getTeamLogo(){
     //To Fetch The Football League
     fetch("https://api-football-v1.p.rapidapi.com/v3/leagues",{
-        //Api Header
-        headers: headers
+        headers//API Headers(APi Key And API Host)
     })
     .then(response=>response.json())
     .then(data=>{
-        //To Get The Img Element ID
-        const englishPremierLeague = document.getElementById("englishPremierLeague");
-        const laLiga = document.getElementById("laLiga");
-        const serie_a = document.getElementById("serieA");
-        const bundesliga = document.getElementById("bundesliga");
-        const ligue1 = document.getElementById("ligue1");
-        //To Assign The Img Src With The Respective Football League logo ffrom api
-        ligue1.src = data.response[2].league.logo;
-        bundesliga.src = data.response[6].league.logo;
-        serie_a.src = data.response[7].league.logo;
-        laLiga.src = data.response[10].league.logo;
-        englishPremierLeague.src = data.response[5].league.logo;
+        //The Image Element ID
+        const imageElementId = ["englishPremierLeague","laLiga","serieA","bundesliga","ligue1"];
+        const apiIndex = [5,10,7,6,2];//The API Response index
+        /* To Get The Image Element According To The Id And Assign The
+        image src With Respective League Logo From The API*/
+        for(let i=0;i<imageElementId.length;i++)
+        {
+            let imgElement = document.getElementById(imageElementId[i]);
+            let apiLeagueLogoUrl = data.response[apiIndex[i]].league.logo;
+            imgElement.src = apiLeagueLogoUrl;
+        }
     })
-
 }
 getTeamLogo();
-/*Check Which League User Pick Based On The Image Click*/
 //Get All img element in the logo-container
 const images = document.querySelectorAll(".logo-container img");
 //add event listener to detect Which Image User Click
 images.forEach(image=>{
     image.addEventListener("click",function(){
         /*If User Click On The Premier League etc... Logo 
-        It Will Call The Functions WIth The League ID*/
+        It Will Call The Fixture And Top Scorer 
+        Functions WIth The League ID*/
         switch(image.id) {
             case "englishPremierLeague":
                 getFixture(39);
