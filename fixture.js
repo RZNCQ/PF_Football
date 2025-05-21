@@ -35,22 +35,27 @@ images.forEach(image=>{
             case "englishPremierLeague":
                 getFixture(39);
                 getTopScorer(39);
+                getTopAssists(39);
                 break;
             case "laLiga":
                 getFixture(140);
                 getTopScorer(140);
+                getTopAssists(140);
                 break;
             case "serieA":
                 getFixture(135);
                 getTopScorer(135);
+                getTopAssists(135);
                 break;
             case "bundesliga":
                 getFixture(78);
                 getTopScorer(78);
+                getTopAssists(135);
                 break;
             case "ligue1":
                 getFixture(61);
                 getTopScorer(61);
+                getTopAssists(61);
                 break;
             default:
                 break;
@@ -91,7 +96,7 @@ function getFixture(id) {
             </li>
             `      
         });
-        fixtureData.innerHTML = htmlContentFixture;
+        fixtureData.innerHTML += htmlContentFixture;
     })
     .catch(error => {
       alert('Error fetching fixtures:', error);
@@ -100,7 +105,7 @@ function getFixture(id) {
 }
 const leagueStatsData = document.querySelector('.league-stats');
 function getTopScorer(id){
-    let htmlContentStats = "";
+    let htmlTopScorer = "";
     fetch(`https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${id}&season=2024`,{
         headers:headers
     })
@@ -110,7 +115,7 @@ function getTopScorer(id){
             const playerName = stats.player.name;
             const goalScored = stats.statistics[0].goals.total;
             const playerImage = stats.player.photo;
-            htmlContentStats+= `
+            htmlTopScorer+= `
             <li>
                 <img src="${playerImage}" alt="Player Image">
                 <span>
@@ -119,9 +124,39 @@ function getTopScorer(id){
                 </span>
             </li>`
         })
-        leagueStatsData.innerHTML = htmlContentStats;
+        leagueStatsData.innerHTML = htmlTopScorer;
     })
     .catch(error=>{
+        console.log(`Error Getting Top Scorer: ${error}`)
         leagueStatsData.innerHTML = '<li class="error-warning">Failed to load Top Scorer.</li>'
     })
+}
+function getTopAssists(id)
+{
+    let htmlTopAssist = "<h2>Top Assists</h2>";
+    fetch(`https://api-football-v1.p.rapidapi.com/v3/players/topassists?league=${id}&season=2024`,{
+        headers
+    })
+    .then(response=>response.json())
+    .then(data=>{
+        data.response.forEach(stats=>{
+            const playerName = stats.player.name;
+            const playerAssist = stats.statistics[0].goals.assists;
+            const playerImage = stats.player.photo;
+            htmlTopAssist+=`
+            <li>
+                <img src="${playerImage}" alt="Player Image">
+                <span>
+                    ${playerName}
+                    Assist: ${playerAssist}
+                </span>
+            </li>`
+        })
+        leagueStatsData.innerHTML += htmlTopAssist;
+    })
+    .catch(error=>{
+        console.log(`Error Getting Top Scorer: ${error}`)
+        leagueStatsData.innerHTML = '<li class="error-warning">Failed to load Top Assists.</li>'
+    })
+
 }
