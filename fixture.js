@@ -13,7 +13,7 @@ function getTeamLogo(){
         //The Image Element ID
         const imageElementId = ["englishPremierLeague","laLiga","serieA","bundesliga","ligue1"];
         const apiIndex = [5,10,7,6,2];//The API Response index
-        /* To Get The Image Element According To The Id And Assign The
+        /* Get Image Element According To The Id And Assign
         image src With Respective League Logo From The API*/
         for(let i=0;i<imageElementId.length;i++)
         {
@@ -29,9 +29,8 @@ const images = document.querySelectorAll(".logo-container img");
 //add event listener to detect Which Image User Click
 images.forEach(image=>{
     image.addEventListener("click",function(){
-        /*If User Click On The Premier League etc... Logo 
-        It Will Call The Fixture And Top Scorer 
-        Functions WIth The League ID*/
+        /*If User Click On The Premier League etc... Logo It Will Call 
+        The Fixture And Top Scorer Function WIth The League ID*/
         switch(image.id) {
             case "englishPremierLeague":
                 getFixture(39);
@@ -63,31 +62,32 @@ const fixtureData = document.querySelector(".league-fixtures");
 function getFixture(id) {
     let htmlContentFixture = "";
     fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${id}&season=2024`, {
-        headers: headers
+        headers
     })
     .then(response => response.json())
     .then(data=>{
-        //To Retrieve The Fixture Teams,Match Status & Score And Store It In Variable
+        //To Loop The Fixture In Response
         data.response.forEach(fixture => {
+            //Get The Match Information And Store It In Variables
             const homeTeam = fixture.teams.home.name;
             const awayTeam = fixture.teams.away.name;
             const matchStatus = fixture.fixture.status.long;
             const homeScore = fixture.goals.home;
             const awayScore = fixture.goals.away;
-            const matchDate = fixture.fixture.date
+            const matchDate = new Date(fixture.fixture.date).toLocaleString('en-GB');
             //Assign The Match Status If The Match Hasnt Been Played
-            let matchDetail = `<span class="status">${matchStatus}</span>`;
+            let matchDetail = `<div class="status">${matchStatus}</div>`;
             //To Check If The Match is Over If it is Over It will Retrive The Score Insted Of the Status
             if (matchStatus.toLowerCase().includes('finished')) {
-            matchDetail = `<span class="score">${homeScore} - ${awayScore}</span>`;
+            matchDetail = `<div class="score">${homeScore} - ${awayScore}</div>`;
             }
             //To append the fixture List WIth the current Fixture retrieve In The loop 
             htmlContentFixture += `
             <li class="fixture-data">
-                <span class="match-date">${matchDate}}</span>
-                <span class="home-team">${homeTeam}</span>
+                <div class="match-date">${matchDate}</div>
+                <div class="team">${homeTeam}</div>
                 ${matchDetail}
-                <span class="away-team">${awayTeam}</span>
+                <div class="team">${awayTeam}</div>
             </li>
             `      
         });
