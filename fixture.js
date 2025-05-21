@@ -34,28 +34,18 @@ images.forEach(image=>{
         switch(image.id) {
             case "englishPremierLeague":
                 getFixture(39);
-                getTopScorer(39);
-                getTopAssists(39);
                 break;
             case "laLiga":
                 getFixture(140);
-                getTopScorer(140);
-                getTopAssists(140);
                 break;
             case "serieA":
                 getFixture(135);
-                getTopScorer(135);
-                getTopAssists(135);
                 break;
             case "bundesliga":
                 getFixture(78);
-                getTopScorer(78);
-                getTopAssists(135);
                 break;
             case "ligue1":
                 getFixture(61);
-                getTopScorer(61);
-                getTopAssists(61);
                 break;
             default:
                 break;
@@ -96,7 +86,8 @@ function getFixture(id) {
             </li>
             `      
         });
-        fixtureData.innerHTML += htmlContentFixture;
+        fixtureData.innerHTML = htmlContentFixture;
+        getTopScorer(id);
     })
     .catch(error => {
       alert('Error fetching fixtures:', error);
@@ -125,6 +116,7 @@ function getTopScorer(id){
             </li>`
         })
         leagueStatsData.innerHTML = htmlTopScorer;
+        getTopAssists(id);
     })
     .catch(error=>{
         console.log(`Error Getting Top Scorer: ${error}`)
