@@ -33,34 +33,31 @@ const images = document.querySelectorAll(".logo-container img");
 //add event listener to detect Which Image User Click
 images.forEach(image=>{
     image.addEventListener("click",function(){
-        //Get the ID Of the Image Element From HTML According TO User Click.
-        const selectedImageId = this.id;
         /*If User Click On The Premier League etc... Logo 
         It Will Call The Functions WIth The League ID*/
-        if(selectedImageId==="englishPremierLeague")
-        {
-            getFixture(39);
-            getTopScorer(39);
-        }
-        else if(selectedImageId==="laLiga")
-        {
-            getFixture(140);
-            getTopScorer(140);
-        }
-        else if(selectedImageId==="serieA")
-        {
-            getFixture(135);
-            getTopScorer(135);
-        }
-        else if(selectedImageId==="bundesliga")
-        {
-            getFixture(78);
-            getTopScorer(78);
-        }
-        else if(selectedImageId==="ligue1")
-        {
-            getFixture(61);
-            getTopScorer(61);    
+        switch(image.id) {
+            case "englishPremierLeague":
+                getFixture(39);
+                getTopScorer(39);
+                break;
+            case "laLiga":
+                getFixture(140);
+                getTopScorer(140);
+                break;
+            case "serieA":
+                getFixture(135);
+                getTopScorer(135);
+                break;
+            case "bundesliga":
+                getFixture(78);
+                getTopScorer(78);
+                break;
+            case "ligue1":
+                getFixture(61);
+                getTopScorer(61);
+                break;
+            default:
+                break;
         }
     })
 })
