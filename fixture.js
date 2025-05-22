@@ -62,7 +62,7 @@ function getFixture(id) {
     .then(response => response.json())
     .then(data=>{
         //To Loop The Fixture In Response
-        data.response.forEach(fixture => {
+        data.response.reverse().forEach(fixture => {
             //Get The Match Information And Store It In Variables
             const homeTeam = fixture.teams.home.name;
             const awayTeam = fixture.teams.away.name;
@@ -70,6 +70,7 @@ function getFixture(id) {
             const homeScore = fixture.goals.home;
             const awayScore = fixture.goals.away;
             const matchDate = new Date(fixture.fixture.date).toLocaleString('en-GB');
+            const matchId = fixture.fixture.id;
             //Assign The Match Status If The Match Hasnt Been Played
             let matchDetail = `<div class="status">${matchStatus}</div>`;
             //To Check If The Match is Over If it is Over It will Retrive The Score Insted Of the Status

@@ -1,9 +1,9 @@
 * {
     box-sizing: border-box;
-}
-body{
     margin: 0;
     padding: 0;
+}
+body{
     background-color: rgb(39, 39, 39);
     color: rgb(228, 225, 225);
 }
@@ -42,11 +42,10 @@ body{
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgb(0, 0, 0,0.1);
+    font-size: 1.2rem;
 }
 ul{
     list-style: none;
-    padding: 0;
-    margin: 0;
 }
 ul li{
     padding: 12px;
@@ -63,7 +62,7 @@ ul li{
     color: rgb(153, 149, 149);
 }
 .fixture-container {
-    background-color: #fff;
+    background-color: #fcfcfc;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -75,7 +74,7 @@ ul li{
     justify-content: space-between;
     align-items: center;
     padding: 10px 0 ;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #f0f0f0;
 }
 .fixture-data:last-child{
     border-bottom: none;
@@ -87,16 +86,9 @@ ul li{
     text-align: center;
     overflow: hidden; 
 }
-.status{
+.status, .score{
     color: #777;
     font-size: 0.9em;
     width: 20%;
     text-align: center;
 }
-.score{
-    color: #777;
-    font-size: 0.9em;
-    width: 20%;
-    text-align: center;
-}
-
