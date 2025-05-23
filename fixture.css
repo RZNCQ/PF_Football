@@ -1,94 +1,93 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+body {
+    background-color: #272727;
+    color: #e4e1e1;
+    font-family: Arial, sans-serif;
 }
-body{
-    background-color: rgb(39, 39, 39);
-    color: rgb(228, 225, 225);
-}
-.logo-container{
+
+.league-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
-    background-color: rgb(29, 29, 29); 
-    padding: 20px 15px;
-    gap: 25px;
-    border-bottom: 3px solid rgb(0, 0, 0);
-}
-.logo-container img{
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    cursor: pointer;
-    border: 2px solid black;
-}
-.logo-container img:hover{
-    transform: scale(1.1);
-}
-.league-content{
-    display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
     max-width: 1200px;
     margin: 30px auto;
     padding: 0 20px;
+    gap: 20px;
 }
-.league-content div{
+
+.fixture-container, .league-stats-container {
     flex: 1 1 45%;
     background-color: rgb(51, 51, 51);
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgb(0, 0, 0,0.1);
-    font-size: 1.2rem;
 }
-ul{
+
+.fixture-container h2, .league-stats-container h2 {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: rgb(255, 255, 255);
+}
+
+ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
-ul li{
-    padding: 12px;
-    border-bottom: 1px solid rgb(54, 54, 54);
+.fixture-data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    background-color: rgb(68, 68, 68);
+    margin-bottom: 5px;
+    padding: 5px 9px;
+    border-radius: 5px;
 }
-.league-stats img {
+
+.match-date {
+    width: 20%;
+    color: rgb(187, 187, 187);
+    font-size: 0.6rem;
+    text-align: left;
+}
+
+.team {
+    width: 30%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: bold;
+    color: rgb(238, 238, 238);
+}
+
+.score, .status {
+    width: 20%;;
+    text-align: center;
+    color: rgb(204, 204, 204);
+    font-weight: bold;
+    font-size: 0.65rem;
+}
+.logo-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 15px;
+    background-color: rgb(29, 29, 29);
+}
+
+.logo-container img {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
+    object-fit: contain;
+    border: 2px solid rgb(68, 68, 68);
+    border-radius: 10px;
+    padding: 6px;
+    background-color: rgb(42, 42, 42);
+    cursor: pointer;
 }
-.league-stats span{
-    font-size: 14px;
-    color: rgb(153, 149, 149);
-}
-.fixture-container {
-    background-color: #fcfcfc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 60%;
-    margin: 0 auto;
-}
-.fixture-data{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0 ;
-    border-bottom: 1px solid #f0f0f0;
-}
-.fixture-data:last-child{
-    border-bottom: none;
-}
-.team {
-    font-weight: bold;
-    color: rgb(153, 149, 149);
-    width: 40%;
-    text-align: center;
-    overflow: hidden; 
-}
-.status, .score{
-    color: #777;
-    font-size: 0.9em;
-    width: 20%;
-    text-align: center;
+
+.logo-container img:hover {
+    transform: scale(1.1);
+    background-color: rgb(68, 68, 68);
 }

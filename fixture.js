@@ -103,7 +103,7 @@ function getTopScorer(id){
     })
     .then(response=>response.json())
     .then(data=>{
-        data.response.forEach(stats=>{
+        data.response.slice(0,10).forEach(stats=>{
             const playerName = stats.player.name;
             const goalScored = stats.statistics[0].goals.total;
             const playerImage = stats.player.photo;
@@ -132,7 +132,7 @@ function getTopAssists(id)
     })
     .then(response=>response.json())
     .then(data=>{
-        data.response.forEach(stats=>{
+        data.response.slice(0,10).forEach(stats=>{
             const playerName = stats.player.name;
             const playerAssist = stats.statistics[0].goals.assists;
             const playerImage = stats.player.photo;
