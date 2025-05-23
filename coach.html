@@ -99,12 +99,13 @@
             <input type="text" id="search-coach" placeholder="Enter coach name">
             <button onclick="searchForCoach()">Search</button>
         </section>
-        <section id="data-container">
+        <section class="data-container">
             <!-- Data will appear here -->
         </section>
         <button class="home-button" onclick="">Back to Home</button>
     </main>
     <footer><p>&copy; 2025 PGFM Football theme Project</p></footer>
+
     <script>
         //API Headers
         const headers = {
@@ -112,7 +113,7 @@
             'x-rapidapi-host': 'api-football-v1.p.rapidapi.com'
         }
         //get the data container from html
-        const dataContainer = document.querySelector("#data-container");
+        const dataContainer = document.querySelector(".data-container");
         //Search and display Coach Profile
         function searchForCoach(){
             const searchedCoach = document.getElementById("search-coach").value;

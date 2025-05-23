@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="country-selector">
+        <h2>Test Your Football Knowledge</h2>
+        <label>
+            Enter A Country Which You Want To Test: 
+            <input type="text" id="country" placeholder="Enter A Country">
+        </label>
+        <button class="search-country" onclick="searchForCountry()">Search</button>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-data">
+            
+        </div>
+    </div>
+    <script>
+        const headers = {
+            'x-rapidapi-key': '929cb32fadmsh106182c8d708006p189535jsn7b9c49344445',
+            'x-rapidapi-host': 'api-football-v1.p.rapidapi.com'
+        }
+        const quizData = document.querySelector(".quiz-data");
+        function searchForCountry(){
+            const searchCountry = document.getElementById("country").value;
+            fetch(`https://api-football-v1.p.rapidapi.com/v3/teams?country=${searchCountry}`,{
+                headers
+            })
+            .then(response=>response.json())
+            .then(data=>{
+                const randomTeamIndex = Math.floor(Math.random()*data.response.length);
+                const correctOption = data.response[randomTeamIndex].team
+                let options = [];
+                while(options.length < 4){
+                    const randomTeam = Math.floor(Math.random()*data.response.length);
+                    const team = data.response[randomTeam].team
+                    if(team.name !== correctOption.name && !options.includes(team.name)){
+                        options.push(team.name);
+                    }
+                }   
+                options.push(correctOption.name);
+                options = options.sort(()=>Math.random()-0.5);
+                quizData.innerHTML = `
+                <h2>What Team Is This?</h2>
+                <img src="${correctOption.logo}" alt="Team Logo">
+                ${options
+                    .map(name=>`<button onclick="checkAnswer('${name}', '${correctOption.name}')">${name}</button>`)}
+                `
+
+            })
+        }
+        function checkAnswer(selected, correct) {
+            alert(selected === correct ? "Correct!" : "Wrong!");
+        }
+
+    </script>
+</body>
+</html>
