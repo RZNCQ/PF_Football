@@ -67,6 +67,13 @@ ul {
     font-weight: bold;
     font-size: 0.65rem;
 }
+.league-stats{
+    font-size: 0.85rem;
+}
+.league-stats img{
+    border-radius: 50%;
+    width: 50px;
+}
 .logo-container {
     display: flex;
     justify-content: center;
