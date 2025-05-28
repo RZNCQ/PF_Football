@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>League Standings</title>
+  <style>
+    body{
+      background-color: rgb(56, 54, 54);
+      color: rgb(255, 255, 255);
+    }
+    table, th, td { 
+      border: 1px solid rgb(204, 204, 204); 
+      border-collapse: collapse; 
+      padding: 10px; 
+    }
+    th { 
+      background: rgb(109, 107, 107); 
+    }
+    #standings{
+      margin-top: 10px;
+      border: none;
+      font-size: 2rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<h2>Choose A League To View The Standings</h2>
+<select id="select-league">
+  <option>-</option>
+  <option value="39">Premier League</option>
+  <option value="140">La Liga</option>
+  <option value="78">Bundesliga</option>
+  <option value="135">Serie A</option>
+  <option value="61">Ligue 1</option>
+</select>
+<table id="standings">
+  <thead>
+    <tr>
+      <th>Pos</th>
+      <th>Team</th>
+      <th>P</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>Pts</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<script>
+  //Api Headers for auth
+  const headers = {
+    'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
+    'x-rapidapi-key': '929cb32fadmsh106182c8d708006p189535jsn7b9c49344445'
+  };
+  //Get The Elements and id
+  const select = document.getElementById('select-league');
+  const tbody = document.querySelector('#standings tbody');
+  const table = document.getElementById('standings');
+  function loadStandings(id) {
+    tbody.innerHTML = '';
+    //fetch the standings api data according to the league id
+    fetch(`https://api-football-v1.p.rapidapi.com/v3/standings?league=${id}&season=2024`, { 
+      headers 
+    })
+      .then(response => response.json())
+      .then(data => {
+        /*
+        Loop Through The Team In Api Standings Data And Assign The
+        Table row and Table Data With tHE stats
+        */
+        data.response[0].league.standings[0].forEach(team => {
+          tbody.innerHTML += `<tr>
+            <td>${team.rank}</td>
+            <td>${team.team.name}</td>
+            <td>${team.all.played}</td>
+            <td>${team.all.win}</td>
+            <td>${team.all.draw}</td>
+            <td>${team.all.lose}</td>
+            <td>${team.points}</td>
+          </tr>`;
+        });
+        table.style.display = "block";
+      })
+      //To SHow Error When The Fetch Fail
+      .catch(error=>{
+        tbody.innerHTML = `<tr>
+          <td colspan="7">Error Fetching Data</td>
+          </tr>`
+      });
+  }
+  //Load The Standings Based On User Selection
+  select.onchange = () => loadStandings(select.value);
+</script>
+</body>
+</html>
