@@ -63,28 +63,26 @@ function getFixture(id) {
     .then(data=>{
         //To Loop The Fixture In Response
         data.response.reverse().forEach(fixture => {
-            //Get The Match Information And Store It In Variables
-            const homeTeam = fixture.teams.home.name;
-            const awayTeam = fixture.teams.away.name;
+            //Get The Match ID, Status & Date Information And Store It In Variables
             const matchStatus = fixture.fixture.status.long;
-            const homeScore = fixture.goals.home;
-            const awayScore = fixture.goals.away;
             const matchDate = new Date(fixture.fixture.date).toLocaleString('en-GB');
             const matchId = fixture.fixture.id;
             //Assign The Match Status If The Match Hasnt Been Played
             let matchDetail = `<div class="status">${matchStatus}</div>`;
             //To Check If The Match is Over If it is Over It will Retrive The Score Insted Of the Status
             if (matchStatus.toLowerCase().includes('finished')) {
-            matchDetail = `<div class="score">${homeScore} - ${awayScore}</div>`;
+            matchDetail = `<div class="score">${fixture.goals.home} - ${fixture.goals.away}</div>`;
             }
             //To append the fixture List WIth the current Fixture retrieve In The loop 
             htmlContentFixture += `
+            <a href="test.html?data-id=${matchId}">
             <li class="fixture-data">
                 <div class="match-date">${matchDate}</div>
-                <div class="team">${homeTeam}</div>
+                <div class="team">${fixture.teams.home.name}</div>
                 ${matchDetail}
-                <div class="team">${awayTeam}</div>
+                <div class="team">${fixture.teams.away.name}</div>
             </li>
+            </a>
             `      
         });
         fixtureData.innerHTML = htmlContentFixture;
