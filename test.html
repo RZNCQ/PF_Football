@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Match Details</title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                min-height: 100vh;
+                margin: 0;
+            }
+            section {
+                width: 100%;
+                max-width: 700px;
+            }
+
+            #wg-api-football-game {
+                width: 100%;
+                max-width: none;
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="">
+        <div id="wg-api-football-game"
+            data-host="v3.football.api-sports.io"
+            data-key="970a95623f33e8cb3976a94ece8f610e" 
+            data-id=""
+            data-theme="dark"
+            data-show-errors="false"
+            data-show-logos="true"
+            class="wg_loader">
+        </div>
+        </section>
+        <script type="module" src="https://widgets.api-sports.io/2.0.3/widgets.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // 1. Get the match_id from the URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const matchId = "718243"
+                const matchWidgetDiv = document.getElementById("wg-api-football-game");
+                if (matchId) {
+                    // 2. Set the data-match attribute
+                    matchWidgetDiv.setAttribute("data-id", "718243");
+                } 
+                else {
+                    matchWidgetDiv.innerHTML = "<p>No match ID found in the URL. Please go back to fixtures and select a match.</p>";
+                    console.error("Match ID not found in URL.");
+                }
+            });
+        </script>
+    </body>
+</html>
