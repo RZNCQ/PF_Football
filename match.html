@@ -60,12 +60,12 @@
             document.addEventListener('DOMContentLoaded', function() {
                 // 1. Get the match_id from the URL
                 const urlParams = new URLSearchParams(window.location.search);
-                //const matchId = urlParams.get("data-id")
-                const matchId = 718243;
+                const matchId = urlParams.get("data-id")
+                //const matchId = 718243;
                 const matchWidgetDiv = document.getElementById("wg-api-football-game");
                 if (matchId) {
                     // 2. Set the data-match attribute
-                    matchWidgetDiv.setAttribute("data-id", "718243");
+                    matchWidgetDiv.setAttribute("data-id", matchId);
                 } 
                 else {
                     matchWidgetDiv.innerHTML = "<p>No match ID found in the URL. Please go back to fixtures and select a match.</p>";

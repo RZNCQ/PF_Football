@@ -1,6 +1,6 @@
 //Store The API Key And The API Host. 
 const headers = {
-    'x-rapidapi-key': '5b2f9a1189msh6167f7a56a19908p168f53jsna42dc93fdb51',
+    'x-rapidapi-key': '929cb32fadmsh106182c8d708006p189535jsn7b9c49344445',
     'x-rapidapi-host': 'api-football-v1.p.rapidapi.com'
 }
 function getTeamLogo(){
