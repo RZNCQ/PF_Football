@@ -13,7 +13,6 @@ body {
     padding: 0 20px;
     gap: 20px;
 }
-
 .fixture-container, .league-stats-container {
     flex: 1 1 45%;
     background-color: rgb(51, 51, 51);
@@ -97,4 +96,17 @@ ul {
 .logo-container img:hover {
     transform: scale(1.1);
     background-color: rgb(68, 68, 68);
+}
+footer{
+    margin-top: 0;
+    text-align: center;
+}
+.league-fixtures a {
+    text-decoration: none;
+    display: block;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.league-fixtures a:hover {
+    border-color: #4CAF50;
 }
