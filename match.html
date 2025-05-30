@@ -57,17 +57,20 @@
         </footer>
         <script type="module" src="https://widgets.api-sports.io/2.0.3/widgets.js"></script>
         <script>
+            //Will Trigger Once The Html document Has Loaded Fully.
             document.addEventListener('DOMContentLoaded', function() {
-                // 1. Get the match_id from the URL
+                // Get the match_id from the URL
                 const urlParams = new URLSearchParams(window.location.search);
                 const matchId = urlParams.get("data-id")
                 //const matchId = 718243;
                 const matchWidgetDiv = document.getElementById("wg-api-football-game");
+                //if match id Founch
                 if (matchId) {
-                    // 2. Set the data-match attribute
+                    //Set the data-match attribute
                     matchWidgetDiv.setAttribute("data-id", matchId);
                 } 
                 else {
+                    //If No match id found WIll display error.
                     matchWidgetDiv.innerHTML = "<p>No match ID found in the URL. Please go back to fixtures and select a match.</p>";
                     console.error("Match ID not found in URL.");
                 }

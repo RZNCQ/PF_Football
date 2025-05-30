@@ -52,10 +52,11 @@ images.forEach(image=>{
         }
     })
 })
-
+//Get Ul Tag From Fixture div
 const fixtureData = document.querySelector(".league-fixtures");
 function getFixture(id) {
     let htmlContentFixture = "";
+    //Fetch The Fixture According To League
     fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${id}&season=2024`, {
         headers
     })
@@ -86,25 +87,32 @@ function getFixture(id) {
             `      
         });
         fixtureData.innerHTML = htmlContentFixture;
+        //To Call The Top Scorer function.
         getTopScorer(id);
     })
+    //When There Is error fetching the fixture It Will Append Error
     .catch(error => {
       alert('Error fetching fixtures:', error);
       fixtureData.innerHTML = '<li class="error-warning">Failed to load fixtures.</li>';
     });
 }
+//Get The Ul Tag In The Stats Div
 const leagueStatsData = document.querySelector('.league-stats');
 function getTopScorer(id){
     let htmlTopScorer = "";
+    //Fetch Top Scorer From Api According To The League
     fetch(`https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${id}&season=2024`,{
         headers:headers
     })
     .then(response=>response.json())
     .then(data=>{
+        //Only Loop The First 10 Top Scorer In The Api Json
         data.response.slice(0,10).forEach(stats=>{
+            //Get The Top Scorer Name,Goals Scored And Profile Image.
             const playerName = stats.player.name;
             const goalScored = stats.statistics[0].goals.total;
             const playerImage = stats.player.photo;
+            //To Append The Player Profile In League Stats Div
             htmlTopScorer+= `
             <li>
                 <img src="${playerImage}" alt="Player Image">
@@ -115,8 +123,10 @@ function getTopScorer(id){
             </li>`
         })
         leagueStatsData.innerHTML = htmlTopScorer;
+        //To Call For The Top Assist Function.
         getTopAssists(id);
     })
+    //If There is error fetching the top scorer Will Append Error Instead.
     .catch(error=>{
         console.log(`Error Getting Top Scorer: ${error}`)
         leagueStatsData.innerHTML = '<li class="error-warning">Failed to load Top Scorer.</li>'
@@ -125,15 +135,19 @@ function getTopScorer(id){
 function getTopAssists(id)
 {
     let htmlTopAssist = "<h2>Top Assists</h2>";
+    //Fetch The Top Assists In the lkeague.
     fetch(`https://api-football-v1.p.rapidapi.com/v3/players/topassists?league=${id}&season=2024`,{
         headers
     })
     .then(response=>response.json())
     .then(data=>{
+        //Loop Only the Top 10 Assists In the api json
         data.response.slice(0,10).forEach(stats=>{
+            //Get The Player Name,Image And Assists.
             const playerName = stats.player.name;
             const playerAssist = stats.statistics[0].goals.assists;
             const playerImage = stats.player.photo;
+            //Will Append The Player Profile In The League Stats Div After The Top Scorer
             htmlTopAssist+=`
             <li>
                 <img src="${playerImage}" alt="Player Image">
@@ -145,6 +159,7 @@ function getTopAssists(id)
         })
         leagueStatsData.innerHTML += htmlTopAssist;
     })
+    //Will Append Error If It Fails to fetxch
     .catch(error=>{
         console.log(`Error Getting Top Scorer: ${error}`)
         leagueStatsData.innerHTML = '<li class="error-warning">Failed to load Top Assists.</li>'

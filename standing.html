@@ -99,6 +99,7 @@
                 .then(data => {
                     // Loop Through The Team In Api Standings Data And Assign The Table row and Table Data With the stats
                     data.response[0].league.standings[0].forEach(team => {
+                        //Append The Team Stats and name
                         tbody.innerHTML += `
                             <tr>
                                 <td>${team.rank}</td>
@@ -112,6 +113,7 @@
                             </tr>
                         `;
                     });
+                    //display The Table
                     table.style.display = "block";
                 })
                 // To Show Error On the standings When The Fetch Fail
