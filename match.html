@@ -8,11 +8,13 @@
             body {
                 display: flex;
                 justify-content: center;
-                align-items: flex-start;
+                flex-direction: column;
+                align-items: center;
                 min-height: 100vh;
                 margin: 0;
+                background-color: rgb(44, 41, 41);
             }
-            section {
+            main {
                 width: 100%;
                 max-width: 700px;
             }
@@ -25,27 +27,30 @@
         </style>
     </head>
     <body>
-        <section class="">
-        <div id="wg-api-football-game"
-            data-host="v3.football.api-sports.io"
-            data-key="970a95623f33e8cb3976a94ece8f610e" 
-            data-id=""
-            data-theme="dark"
-            data-show-errors="false"
-            data-show-logos="true"
-            class="wg_loader">
-        </div>
-        </section>
+        <main>
+            <div id="wg-api-football-game"
+                data-host="v3.football.api-sports.io"
+                data-key="970a95623f33e8cb3976a94ece8f610e" 
+                data-id=""
+                data-theme="dark"
+                data-show-errors="false"
+                data-show-logos="true"
+                class="wg_loader">
+            </div>            
+        </main>
+        <footer>
+            <p>&copy; 2025 Football theme PGFM Project.</p>
+        </footer>
         <script type="module" src="https://widgets.api-sports.io/2.0.3/widgets.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // 1. Get the match_id from the URL
                 const urlParams = new URLSearchParams(window.location.search);
-                const matchId = "718243"
+                const matchId = urlParams.get("data-id")
                 const matchWidgetDiv = document.getElementById("wg-api-football-game");
                 if (matchId) {
                     // 2. Set the data-match attribute
-                    matchWidgetDiv.setAttribute("data-id", "718243");
+                    matchWidgetDiv.setAttribute("data-id", matchId);
                 } 
                 else {
                     matchWidgetDiv.innerHTML = "<p>No match ID found in the URL. Please go back to fixtures and select a match.</p>";

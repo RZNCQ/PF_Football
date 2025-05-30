@@ -75,7 +75,7 @@ function getFixture(id) {
             }
             //To append the fixture List WIth the current Fixture retrieve In The loop 
             htmlContentFixture += `
-            <a href="test.html?data-id=${matchId}">
+            <a href="match.html?data-id=${matchId}">
             <li class="fixture-data">
                 <div class="match-date">${matchDate}</div>
                 <div class="team">${fixture.teams.home.name}</div>
