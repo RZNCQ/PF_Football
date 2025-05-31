@@ -55,7 +55,7 @@ images.forEach(image=>{
 //Get Ul Tag From Fixture div
 const fixtureData = document.querySelector(".league-fixtures");
 function getFixture(id) {
-    let htmlContentFixture = "";
+    let htmlContentFixture = "<p>Click To View Match Stats</p>";
     //Fetch The Fixture According To League
     fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${id}&season=2024`, {
         headers
