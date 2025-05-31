@@ -16,3 +16,8 @@ A dynamic football (soccer) web application that fetches real-time data from the
 Frontend: HTML, CSS, JavaScript
 API: API-Football
 
+Image Credit
+From Unsplash.
+
+Github Page Link:
+Figma:
