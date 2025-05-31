@@ -6,9 +6,9 @@ A dynamic football (soccer) web application that fetches real-time data from the
 
 📅 Fixtures — Get Top 5 League Fixture. upcoming and past football matches.
 
-🎯 Top Scorers & Assists — View the Top 10 players in goals and assists.
+🎯 Top Scorers & Assists — View the Top 10 players From User Select Leagues in goals and assists.
 
-📊 Match Stats — Get statistics for specific games.
+📊 Match Stats — Get statistics for specific games By Clicking the Fixture.
 
 👤 Coach Search — Find coaches by name and view their profiles.
 
@@ -19,5 +19,4 @@ API: API-Football
 Image Credit
 From Unsplash.
 
-Github Page Link:
-Figma:
+Github Page Link: https://rzncq.github.io/PF_Football/
